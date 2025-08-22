@@ -1,5 +1,5 @@
 ---
-CIP: ?
+CIP: xxxx
 Title: Verifiable Peras Certificates
 Category: Ledger
 Status: Proposed
@@ -8,7 +8,7 @@ Authors:
 Implementors: []
 Discussions:
     - https://github.com/cardano-foundation/CIPs/pull/?
-Created: 2025-05-26
+Created: 2025-08-22
 License: CC-BY-4.0
 ---
 
@@ -102,7 +102,7 @@ arbitrage between settlement time and settlement confidence.
 
 While different types of proofs can be built, we propose here a naive approach
 to build a proof that a transaction is covered by Peras certificates.
-Sucha a proof can use, as public inputs:
+Such a proof can use, as instances:
 
 - The hash of the initial block, which is the first block of the chain or a block agreed
   upon by the parties.
@@ -110,7 +110,7 @@ Sucha a proof can use, as public inputs:
   transaction.
 - The transaction id.
 
-And as secrets:
+And as witnesses:
 - A chain of blocks from the initial block to the one corresponding to the one
   corresponding to the last Peras certificate.
 - The stake pool distribution of the previous epoch.
@@ -124,24 +124,28 @@ The circuit of the proof should verify that:
 - The Peras certificates are valid, i.e. the public keys used to sign them
   are in the list of public keys of the SPOs and they have enough stake.
 
+Obviously, we can add logic on top of that and verify specific part of the
+transaction if needed.
+
 ## Path to Active
 
 ### Acceptance Criteria
-<!-- Describes what are the acceptance criteria whereby a proposal becomes 'Active' -->
+
+[] Both commitment proofs are included in the block header of the first block of each epoch.
 
 ### Implementation Plan
-<!-- A plan to meet those criteria or `N/A` if an implementation plan is not applicable. -->
+
+[] Peras is implemented and deployed.
+[] Agreement by the Ledger team as defined in CIP-0084 under Expectations for
+ledger CIPs.
+[] The implementation of the CIP is prioritized for a chosen hard fork.
+
 
 <!-- OPTIONAL SECTIONS: see CIP-0001 > Document > Structure table -->
 
 ## Copyright
-<!-- The CIP must be explicitly licensed under acceptable copyright terms. Uncomment the license you wish to use (delete the other one) and ensure it matches the License field in the header.
 
-If AI/LLMs were used in the creation of the copyright text, the author may choose to include a disclaimer to describe their application within the proposal.
--->
-
-<!-- This CIP is licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode). -->
-<!-- This CIP is licensed under [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0). -->
+This CIP is licensed under [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 [Peras]: https://github.com/cardano-foundation/CIPs/blob/master/CIP-0140
 [MerkleTxs]: https://github.com/cardano-foundation/CIPs/pull/964
