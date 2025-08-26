@@ -131,14 +131,14 @@ transaction if needed.
 
 ### Acceptance Criteria
 
-[] Both commitment proofs are included in the block header of the first block of each epoch.
+- [ ] Both commitment proofs are included in the block header of the first block of each epoch.
 
 ### Implementation Plan
 
-[] Peras is implemented and deployed.
-[] Agreement by the Ledger team as defined in CIP-0084 under Expectations for
+- [ ] Peras is implemented and deployed.
+- [ ] Agreement by the Ledger team as defined in CIP-0084 under Expectations for
 ledger CIPs.
-[] The implementation of the CIP is prioritized for a chosen hard fork.
+- [ ] The implementation of the CIP is prioritized for a chosen hard fork.
 
 
 <!-- OPTIONAL SECTIONS: see CIP-0001 > Document > Structure table -->
