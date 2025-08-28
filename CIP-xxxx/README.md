@@ -82,6 +82,41 @@ pairs `(pool_id, public_key)`.
 
 **TODO:** Define the change in the block header structure.
 
+We then suggest to update the block header structure, adding two fields
+`bheaderStakeDistRoot` and `bheaderPerasPubKeysRoot` to the `BHBody` type
+(see below).
+
+```haskell
+data BHBody c = BHBody
+  { bheaderBlockNo :: !BlockNo
+  -- ^ block number
+  , bheaderSlotNo :: !SlotNo
+  -- ^ block slot
+  , bheaderPrev :: !PrevHash
+  -- ^ Hash of the previous block header
+  , bheaderVk :: !(VKey 'BlockIssuer)
+  -- ^ verification key of block issuer
+  , bheaderVrfVk :: !(VRF.VerKeyVRF (VRF c))
+  -- ^ VRF verification key for block issuer
+  , bheaderEta :: !(VRF.CertifiedVRF (VRF c) Nonce)
+  -- ^ block nonce
+  , bheaderL :: !(VRF.CertifiedVRF (VRF c) Natural)
+  -- ^ leader election value
+  , bsize :: !Word32
+  -- ^ Size of the block body
+  , bhash :: !(Hash HASH EraIndependentBlockBody)
+  -- ^ Hash of block body
+  , bheaderOCert :: !(OCert c)
+  -- ^ operational certificate
+  , bheaderStakeDistRoot :: !(Maybe (Hash HASH StakeDist))
+  -- ^ Merkle root of the stake pool distribution of the previous epoch
+  , bheaderPerasPubKeysRoot :: !(Maybe (Hash HASH PerasPubKeys))
+  -- ^ Merkle root of the Peras voting public keys of the SPOs
+  , bprotver :: !ProtVer
+  -- ^ protocol version
+  }
+```
+
 
 
 ## Rationale: how does this CIP achieve its goals?
