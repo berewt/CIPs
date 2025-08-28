@@ -117,6 +117,10 @@ data BHBody c = BHBody
   }
 ```
 
+Both `bheaderStakeDistRoot` and `bheaderPerasPubKeysRoot` are supposed to be
+empty outside of the first block of each epoch. On this first block, a node
+needs to validate these values against the actual stake distribution of the
+previous epoch and the actual list of Peras voting public keys of the SPOs.
 
 
 ## Rationale: how does this CIP achieve its goals?
