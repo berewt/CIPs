@@ -59,7 +59,6 @@ If we add a way to get off-chain the stake distribution of the previous epoch
 and the full list of public keys used to sign the Peras certificates,
 we can verify the Peras certificates against these commitments.
 
-
 More generally, knowing about the stake distribution is helpful to verify any
 type of consensus activity within the network.
 Many parachains solutions (L2, partner chains, etc.) rely on the stake of the
@@ -122,6 +121,13 @@ empty outside of the first block of each epoch. On this first block, a node
 needs to validate these values against the actual stake distribution of the
 previous epoch and the actual list of Peras voting public keys of the SPOs.
 
+Note that we propose to commit on the current state of the stake distribution,
+not on the one of the previous epoch. It doesn't change the fact that both Peras
+and Praos will use the stake distribution of the previous epoch.
+The reason is that we need to have high confidence in the stake distribution
+commitment to use it within our proof (as we do when we use the stake
+distribution to verify the Praos leader election).
+
 
 ## Rationale: how does this CIP achieve its goals?
 
@@ -161,7 +167,9 @@ The circuit of the proof should verify that:
   from the initial block.
 - This block is covered by the given Peras certificates.
 - The Peras certificates are valid, i.e. the public keys used to sign them
-  are in the list of public keys of the SPOs and they have enough stake.
+  are in the list of public keys of the SPOs and they have enough stake, based
+  on the stake distribution of the previous epoch (as intended in the Peras
+  specification).
 
 Obviously, we can add logic on top of that and verify specific part of the
 transaction if needed.
